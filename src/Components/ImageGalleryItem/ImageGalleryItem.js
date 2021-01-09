@@ -4,13 +4,6 @@ import { Component } from 'react';
 import s from './ImageGalleryItem.module.css';
 
 class ImageGalleryItem extends Component {
-  componentDidUpdate() {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
-  }
-
   render() {
     /* id, webformatURL, largeImageURL, tags */
     const { images, onClickImage } = this.props;

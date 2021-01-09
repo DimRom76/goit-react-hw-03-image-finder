@@ -59,6 +59,11 @@ class ImageGallery extends Component {
         }
 
         this.setState({ images: newArrayImage, status: Status.RESOLVED });
+
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        });
       })
       .catch(error => this.setState({ error, status: Status.REJECTED }));
   }
