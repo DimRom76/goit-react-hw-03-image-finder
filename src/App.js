@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import Searchbar from './Components/Searchbar';
+import ImageGallery from './Components/ImageGallery';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { page: 0, queryString: '' };
+  }
+
+  onSubmit = values => {
+    this.setState({ page: 1, queryString: values });
+  };
+
+  onClickButtomLoadMore = event => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+  };
+
+  render() {
+    const { queryString, page } = this.state;
+
+    return (
+      <div className="App">
+        <Searchbar onSubmit={this.onSubmit} />
+        <ImageGallery
+          queryString={queryString}
+          page={page}
+          onClick={this.onClickButtomLoadMore}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
