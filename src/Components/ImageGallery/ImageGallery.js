@@ -81,7 +81,7 @@ class ImageGallery extends Component {
   render() {
     const { images, status, error, showModal } = this.state;
 
-    if (status === 'rejected') {
+    if (status === status.REJECTED) {
       return <h1>{error.message}</h1>;
     }
 
@@ -91,9 +91,9 @@ class ImageGallery extends Component {
           <ImageGalleryItem images={images} onClickImage={this.onClickImage} />
         </ul>
 
-        {status === 'resolved' && <Button onClick={this.props.onClick} />}
+        {status === status.RESOLVED && <Button onClick={this.props.onClick} />}
 
-        {status === 'pending' && <Loader />}
+        {status === status.PENDING && <Loader />}
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
