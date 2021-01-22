@@ -6,26 +6,31 @@ import Modal from '../Modal/Modal';
 
 import s from './ImageGallery.module.css';
 
-const bigImage = { alt: '', src: '' };
+const bigImageInit = { alt: '', src: '' };
 
 class ImageGallery extends Component {
   constructor() {
     super();
-    this.state = { showModal: false };
+    this.state = { showModal: false, bigImage: bigImageInit };
   }
 
   toggleModal = () => {
-    this.setState(({ showModal }) => ({ showModal: !showModal }));
+    this.setState(({ showModal, bigImage }) => {
+      const setBigImage = showModal ? bigImageInit : bigImage;
+      return { showModal: !showModal, bigImage: setBigImage };
+    });
   };
 
   onClickImage = event => {
-    bigImage.alt = event.target.alt;
-    bigImage.src = event.target.dataset.big_img;
+    this.setState({
+      bigImage: { alt: event.target.alt, src: event.target.dataset.big_img },
+    });
+
     this.toggleModal();
   };
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, bigImage } = this.state;
     const { images } = this.props;
 
     return (
